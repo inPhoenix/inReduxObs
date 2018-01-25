@@ -1,19 +1,18 @@
-# inRecognition
+# inReduxRxjs
 [![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](https://github.com/inPhoenix/)
 [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 
-    inRecognition
+    # inReduxRxjs
 
 Click on the link to access the Live Demo:
 
-[https://inphoenix.github.io/inRecognition/](https://inphoenix.github.io/inRecognition/)
+[https://inphoenix.github.io/inReduxObs/](https://inphoenix.github.io/inReduxObs/)
 
 ## The stack
 - [x] React
-- [ ] Redux
-- [ ] Firebase
-- [ ] NodeJs
+- [x] Redux
+- [x] Rxjs
 
 #### Summary for Heroku
 
