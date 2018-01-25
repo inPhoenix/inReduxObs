@@ -1,14 +1,43 @@
 import * as actionTypes from '../actions/index'
 const initialState = {
+  movies: [
+    'starwars',
+    'alien'
+  ],
   items: [],
+  current: null,
+  loading: false,
 };
 
 export function storiesReducer(state = initialState, action) {
   switch(action.type) {
+    case actionTypes.FETCH_ACTION_FULFILLED:
+      console.log('%c reducerFulFilled', 'background:black;color:DarkSlateGray;')
+      return {
+        ...state,
+        current: action.payload,
+        loading: false
+
+      }
+    case actionTypes.FETCH_ACTION:
+        return {
+          ...state,
+          current: null,
+          loading: true
+
+      }
     case actionTypes.LOAD_STORIES:
       return {items: stories.slice()}
     case actionTypes.CLEAR_STORIES:
       return {items: []}
+    case actionTypes.SEARCH_MOVIE:
+      return { ...state, newMovie: action.payload.data }
+    case actionTypes.SEARCH_TITLES:
+      console.log('%c action', 'background:black;color:DarkSlateGray;', action)
+      return {
+        ...state,
+        newTitle: action.payload
+      }
     default:
       return state
   }
