@@ -6,7 +6,8 @@
     # inReduxRxjs
 
 
-<img title="logo" src="public/redux-obs.gif" width="10%">
+<img title="logo" src="public/logo-small.gif" width="10%">
+
 
 Click on the link to access the Live Demo:
 [https://inphoenix.github.io/inReduxObs/](https://inphoenix.github.io/inReduxObs/)
