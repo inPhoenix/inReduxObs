@@ -1,37 +1,38 @@
 import { Observable } from 'rxjs'
 import { combineEpics } from 'redux-observable'
-import { clear, FETCH_ACTION, fetchFulfilled, LOAD_STORIES } from '../actions'
+import { FETCH_ACTION, fetchFulfilled, searchError } from '../actions'
 
 const NEW_URL = 'https://api.themoviedb.org/3/movie/'
 const NEW_API_KEY = '?api_key=047cb4fb0e88284becb1c8a87da00343'
-
 const SEARCH_URL = 'https://api.themoviedb.org/3/search/movie'
 const LANGUAGE = '&language=en-US&'
 const END_OPTIONS = '&page=1&include_adult=false'
 const QUERY = `query=`
 
-//const complete = `${SEARCH_URL}${NEW_API_KEY}${LANGUAGE}${QUERY}${payload}${END_OPTIONS}`
-const gitHubUrl = `https://api.github.com/users/inPhoenix`
-const complete = `https://api.themoviedb.org/3/search/movie?api_key=047cb4fb0e88284becb1c8a87da00343&language=en-US&query=starwars&page=1&include_adult=false`
+const requestSettings = token => ({
+  url: token ? urlFinal(token) : '',
+  crossDomain: true,
+  contentType: 'application/json; charset=utf-8',
+  responseType: 'json',
+})
 
-//const urlRequest = `${SEARCH_URL}${NEW_API_KEY}${LANGUAGE}${QUERY}${movieTitle}${END_OPTIONS}`
+const urlFinal = (token) => `${SEARCH_URL}${NEW_API_KEY}${LANGUAGE}${QUERY}${token}${END_OPTIONS}`
+const ajax = (term) =>
+  term === 'alien3'
+  ? Observable.throw(new Error('Impossible to search Alien III'))
+  : Observable.ajax(requestSettings(term))
 
-// `${SEARCH_URL}${NEW_API_KEY}${LANGUAGE}${QUERY}${token}${END_OPTIONS}`,
 function loadStoriesEpic (action$) {
-  const requestSettings = token => ({
-    url:complete,
-    crossDomain: true,
-    contentType: "application/json; charset=utf-8",
-    responseType:'json',
-  })
-  console.log('%c loadStoriesEpic', 'background:black;color:DarkSlateGray;')
-  console.log(action$)
   return action$.ofType(FETCH_ACTION)
-    .switchMap(({payload})=> {
-      return Observable.ajax(requestSettings(payload))
+    .debounceTime(400) // reseting while there is a new event
+    .filter(action => action.payload !== '')
+    .switchMap(({payload}) => { // cancellation feature free
+      return ajax(payload)
       .map(response => fetchFulfilled(response))
-  })
+        .catch(err => {
+          return Observable.of(searchError(err))
+      })
+    })
 }
 
-//.delay(2000) // free debounce
 export const rootEpic = combineEpics(loadStoriesEpic)

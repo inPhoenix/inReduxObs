@@ -5,14 +5,19 @@
 
     # inReduxRxjs
 
-Click on the link to access the Live Demo:
 
+<img title="logo" src="public/logo-small.gif" width="50%">
+
+Click on the link to access the Live Demo:
 [https://inphoenix.github.io/inReduxObs/](https://inphoenix.github.io/inReduxObs/)
 
 ## The stack
 - [x] React
 - [x] Redux
 - [x] Rxjs
+- [x] TMDB API(www.themoviedb.org)
+
+
 
 #### Summary for Heroku
 

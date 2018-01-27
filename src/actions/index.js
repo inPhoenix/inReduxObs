@@ -1,9 +1,11 @@
-export const LOAD_STORIES = 'LOAD_STORIES'
 export const CLEAR_STORIES = 'CLEAR_STORIES'
 export const SEARCH_MOVIE = 'SEARCH_MOVIE'
 export const SEARCH_TITLES = 'SEARCH_TITLES'
 export const FETCH_ACTION = 'FETCH_ACTION'
 export const FETCH_ACTION_FULFILLED = 'FETCH_ACTION_FULFILLED'
+export const SEARCHED_ERROR = 'SEARCHED_ERROR'
+export const SEARCH_LOADING = 'SEARCH_LOADING'
+
 
 
 const NEW_URL = 'https://api.themoviedb.org/3/movie/'
@@ -23,10 +25,10 @@ export function fetchAction(movie) {
   }
 }
 export function fetchFulfilled(test) {
-  console.log('%c fetchFulfilled!', 'background:black;color:DarkSlateGray;', )
+  console.log('%c fetchFulfilled!', 'background:black;color:DarkSlateGray;', test)
   return {
     type: FETCH_ACTION_FULFILLED,
-    payload: test
+    payload: test.response
   }
 }
 
@@ -42,7 +44,15 @@ export function searchMovie (id) {
   )
 }
 
-// Search Titles
+export function searchLoading(loading) {
+  return {
+    type: SEARCH_LOADING,
+    payload: loading
+
+  }
+}
+
+// Search Titles (list)
 export function searchTitles (movieTitle) {
   console.log('%c searchTitles', 'background:black;color:DarkSlateGray;')
   const urlRequest = `${SEARCH_URL}${NEW_API_KEY}${LANGUAGE}${QUERY}${movieTitle}${END_OPTIONS}`
@@ -53,11 +63,10 @@ export function searchTitles (movieTitle) {
   }
 }
 
-
-
-export function loadStories() {
+export function searchError(err) {
   return {
-    type: LOAD_STORIES
+    type: SEARCHED_ERROR,
+    payload: err.message
   }
 }
 
