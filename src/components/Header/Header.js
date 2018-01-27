@@ -12,7 +12,7 @@ const Header = (props) => {
           {/*<img width="10%" src={TMDBLogo} alt='The Movie Database' />*/}
         </div>
       </div>
-      RxJS Film Search Example
+      React/Redux/RxJS Film Search <a href='https://github.com/inPhoenix/inReduxObs'>Example</a>
     </div>
   )
 }

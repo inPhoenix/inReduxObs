@@ -4,6 +4,7 @@
   "private": true,
   "homepage": "https://inphoenix.github.io/inReduxObs/",
   "dependencies": {
+    "gh-pages": "^1.1.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-redux": "^5.0.6",
