@@ -1,11 +1,58 @@
 .App {
-  //display: flex;
   height: 90vh;
-  flex-direction: column;
-  justify-content: space-between;
   text-align: center;
+  font-family: serif;
 }
 
+.Header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #222222;
+  color: silver;
+}
+
+.logo-container-title {
+  display: flex;
+  justify-content: space-between;
+}
+
+.logo-container {
+  display: flex;
+  justify-content: flex-start;
+  //border: 1px solid purple;
+
+}
+.rxjs {
+  content: 'RxJs';
+  color: purple;
+  width: 30px;
+  height: 30px;
+  background-image: url(../src/images/rx-logo.png);
+  background-repeat: no-repeat;
+  background-size: auto 25px;
+
+}
+
+.tmdb {
+  margin-top: 5px;
+  content: 'RxJs';
+  color: purple;
+  width: 70px;
+  height: 30px;
+  background-image: url(../src/images/tmdb.svg);
+  background-repeat: no-repeat;
+  background-size: auto 25px;
+
+}
+.github {
+  width: 30px;
+  background-image: url(../src/images/github.png);
+  background-repeat: no-repeat;
+  background-size: auto 25px;
+  filter: brightness(20);
+
+}
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
   height: 80px;

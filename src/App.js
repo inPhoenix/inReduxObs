@@ -10,10 +10,6 @@ class App extends Component {
         <Header />
         <Stories />
         <div>
-        <footer>
-          Powered by <div><a href='https://www.themoviedb.org/documentation/api'>TMDb</a></div>
-          <a href='https://github.com/inPhoenix'>inPhoenix</a>
-        </footer>
         </div>
       </div>
     );

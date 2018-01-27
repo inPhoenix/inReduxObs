@@ -1,14 +1,10 @@
 import React, {Component} from 'react'
 import { connect } from 'react-redux'
-import * as actions from '../../actions/index'
+import { searchMovie } from '../../actions'
 
 class MovieListItem extends Component {
-  constructor (props) {
-    super(props)
-
-    this.state = {
-      error: false
-    }
+  state = {
+    error: false
   }
 
   handleError () {
@@ -21,21 +17,27 @@ class MovieListItem extends Component {
     if (this.state.error) {
       return
     }
-    return <img id='image-thumbnail' style={{ width: '50%'}} src={this.props.posterPath} onError={() => this.handleError()} />
+    return <img id='image-thumbnail'
+                style={{ width: '50%'}}
+                src={this.props.posterPath}
+                onError={() => this.handleError()} />
   }
 
   render () {
-    // /*onClick={() => this.props.newSearch(this.props.video.id)*/
     return (
-      <li id='suggestion' style={{ listStyleType: 'none'}}>
+      <li id='suggestion' style={{ listStyleType: 'none'}}
+          onClick={() => this.props.searchMovie(this.props.movieId)}
+      >
         {this.getImage()}
-        <div id='image-title'>
-          {this.props.title}
-          </div>
-
       </li>
     )
   }
 }
 
-export default connect(null, actions)(MovieListItem)
+function mapDispatch(dispatch) {
+  return {
+    searchMovie: (movieId) => dispatch(searchMovie(movieId)),
+  }
+}
+
+export default connect(null, mapDispatch)(MovieListItem)

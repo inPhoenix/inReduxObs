@@ -1,6 +1,6 @@
 import React from 'react'
 
-export function SearchField ({defaultValue, onChange, messages}) {
+export function SearchField ({defaultValue, onChange, messages, loading, cancel}) {
   return (
     <div>
       <input
@@ -10,6 +10,13 @@ export function SearchField ({defaultValue, onChange, messages}) {
         onChange={(event) => onChange(event.target.value)}
         autoFocus
       />
+      {loading && (
+        <button
+          type='button'
+          onClick={cancel}>
+          Cancel
+        </button>
+      )}
       {messages.length > 0 && (
         <ul>
           {messages.map(message =>

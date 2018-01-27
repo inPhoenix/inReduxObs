@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux'
-import { clear,  searchMovie, searchTitles, fetchAction } from '../../actions'
+import { cancelSearch, fetchAction } from '../../actions'
 import { SearchField } from '../SearchField/SearchField'
 import MovieItem from '../MovieItem/MovieItem'
 
@@ -17,9 +17,25 @@ export class Stories extends Component {
     })
   }
 
+  movieDetails = () => {
+    const { movie } = this.props
+    if(!this.props.movie) return null;
+    const prefixPosterPath = 'https://image.tmdb.org/t/p/w500/'
+    return (
+      <div>
+        <p>
+        {movie.overview}
+        </p>
+        <div>
+          <img src={prefixPosterPath + movie.poster_path} height='500' width='400'/>
+        </div>
+
+      </div>
+    )
+
+  }
+
   storyList = () => {
-    console.log('%c state', 'background:black;color:red;', this.props.current && this.props.current.results)
-    console.log('loading?', this.props.loading)
     if(this.props.current && this.props.current.results === 0) return null;
     const prefixPosterPath = 'https://image.tmdb.org/t/p/w500/'
     if(this.props.loading) {
@@ -31,12 +47,11 @@ export class Stories extends Component {
           {
             const posterPathId = item.backdrop_path
             const posterPath = prefixPosterPath + posterPathId
-            console.log('%c item', 'background:black;color:yellow;', item)
-            //if (this.state.error) {return}
             return (
               <div>
                 <MovieItem
                   key={item.id}
+                  movieId={item.id}
                   posterPath={posterPath}
                   title={item.title}
                 />
@@ -48,7 +63,6 @@ export class Stories extends Component {
   }
   handleSearch = (event) => {
     this.props.loadMovies(event)
-    //this.props.searchTitles(event)
     this.setState({
       term: event
     })
@@ -65,7 +79,6 @@ export class Stories extends Component {
     return <img className='image-thumbnail' src={posterPath} onError={() => this.handleError()} />
   }
 
-
   render () {
     return (
       <div >
@@ -74,29 +87,27 @@ export class Stories extends Component {
             <SearchField
               defaultValue={''}
               messages={this.props.messages}
-              // value={this.state.term}
-              // placeholder='Search by Title...'
               onChange={this.handleSearch}
+              loading={this.props.loading}
+              cancel={this.props.cancelSearch}
               // autoFocus
             />
           </div>
           <div id='button-bar'>
             <button
               type='button'
-              onClick={() => this.props.loadMovies('starwars')}
+              onClick={() => this.props.loadMovies('star wars')}
             >
-              Load Movie
+              Movie Suggestion
             </button>
-            {/*<button
-              onClick={this.props.clear}
-              type='button'>
-              clear
-            </button>*/}
           </div>
         </div>
         <div style={{display: 'flex', justifyContent: 'flex-start'}}>
           <div>
             {this.storyList()}
+          </div>
+          <div>
+            {this.movieDetails()}
           </div>
         </div>
       </div>
@@ -107,11 +118,11 @@ export class Stories extends Component {
 function mapState(state) {
   return state;
 }
+
 function mapDispatch(dispatch) {
   return {
     loadMovies: (movie) => dispatch(fetchAction(movie)),
-    clear: () => dispatch(clear()),
-    searchTitles: (event) => dispatch(searchTitles(event))
+    cancelSearch: () => dispatch(cancelSearch())
   }
 }
 export default connect(mapState, mapDispatch)(Stories)

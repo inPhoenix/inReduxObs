@@ -9,12 +9,15 @@ import {Provider} from 'react-redux'
 import reducer from './reducers'
 import { rootEpic } from './epics'
 import {createEpicMiddleware} from 'redux-observable'
+import thunk from 'redux-thunk'
+
+
 
 const epicMiddleware = createEpicMiddleware(rootEpic)
 
 
 // https://github.com/zalmoxisus/redux-devtools-extension
-const store = createStore(reducer, composeWithDevTools(applyMiddleware(epicMiddleware)));
+const store = createStore(reducer, composeWithDevTools(applyMiddleware(epicMiddleware, thunk)));
 
 
 ReactDOM.render(

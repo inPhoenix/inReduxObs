@@ -10,7 +10,6 @@ export function storiesReducer(state = initialState, action) {
   switch(action.type) {
     // RECEIVED_LIST_OF_MOVIES
     case actionTypes.FETCH_ACTION_FULFILLED:
-      console.log('%c reducerFulFilled', 'background:black;color:DarkSlateGray;')
       return {
         ...state,
         current: action.payload,
@@ -20,9 +19,16 @@ export function storiesReducer(state = initialState, action) {
       return {
         ...state,
         // current: null,
-        // loading: true,
+        loading: true,
         messages: []
       }
+    case actionTypes.CANCEL_SEARCH:
+      return {
+        ...state,
+        loading: false,
+        messages: [{type: 'info', text: 'Request Cancelled' }]
+      }
+
     case actionTypes.FETCH_ACTION:
         return {
           ...state,
@@ -31,20 +37,15 @@ export function storiesReducer(state = initialState, action) {
           messages: []
       }
     case actionTypes.SEARCHED_ERROR:
-      console.log('%c action', 'background:black;color:DarkSlateGray;', action)
       return {
         ...state,
         messages: [{type: 'error', text: action.payload}],
         loading: false,
       }
     case actionTypes.SEARCH_MOVIE:
-      return { ...state, newMovie: action.payload.data }
-    case actionTypes.SEARCH_TITLES:
-      console.log('%c action', 'background:black;color:DarkSlateGray;', action)
       return {
         ...state,
-        newTitle: action.payload
-      }
+        movie: action.payload.data }
     default:
       return state
   }
