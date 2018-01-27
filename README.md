@@ -6,26 +6,17 @@
     # inReduxRxjs
 
 
-<img title="logo" src="public/logo-small.gif" width="50%">
+<img title="logo" src="public/logo-small.gif" width="10%">
 
 Click on the link to access the Live Demo:
 [https://inphoenix.github.io/inReduxObs/](https://inphoenix.github.io/inReduxObs/)
 
 ## The stack
 - [x] React
-- [x] Redux
-- [x] Rxjs
-- [x] TMDB API(www.themoviedb.org)
+- [x] [Redux Observable](https://redux-observable.js.org/#) 
+- [x] [RxJs 5](https://github.com/reactivex/rxjs)
+- [x] [TMDB](www.themoviedb.org)
 
-
-
-#### Summary for Heroku
-
----
-    yarn run dev-server
-    git push heroku master
-    heroku open / heroku logs
----
 
 #### Summary for Github pages
 
