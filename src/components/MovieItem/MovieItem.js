@@ -25,7 +25,7 @@ class MovieListItem extends Component {
 
   render () {
     return (
-      <li id='suggestion' style={{ listStyleType: 'none'}}
+      <li className='suggestion' style={{ listStyleType: 'none'}}
           onClick={() => this.props.searchMovie(this.props.movieId)}
       >
         {this.getImage()}

@@ -23,7 +23,7 @@ const ajax = (term) =>
   term === 'alien3'
   ? Observable.throw(new Error('Impossible to search Alien III'))
   : Observable.ajax(requestSettings(term))
-    .delay(500) // *DEV ONLY* Adding forcing delay as example for cancel operation
+    .delay(1500) // *DEV ONLY* Adding forcing delay as example for cancel operation
 
 function loadStoriesEpic (action$) {
   return action$.ofType(FETCH_ACTION)

@@ -22,7 +22,7 @@ export class Stories extends Component {
     if(!this.props.movie) return null;
     const prefixPosterPath = 'https://image.tmdb.org/t/p/w500/'
     return (
-      <div>
+      <div className='movie-details-container'>
         <p>
         {movie.overview}
         </p>
@@ -39,7 +39,7 @@ export class Stories extends Component {
     if(this.props.current && this.props.current.results === 0) return null;
     const prefixPosterPath = 'https://image.tmdb.org/t/p/w500/'
     if(this.props.loading) {
-      return (<p>Loading</p>)
+      return (<div className="loader" style={{ margin: '20vh'}}>Loading...</div>)
     }
     return (
       <div>
@@ -48,7 +48,7 @@ export class Stories extends Component {
             const posterPathId = item.backdrop_path
             const posterPath = prefixPosterPath + posterPathId
             return (
-              <div>
+              <div key={item.id}>
                 <MovieItem
                   key={item.id}
                   movieId={item.id}
@@ -68,17 +68,6 @@ export class Stories extends Component {
     })
   }
 
-  getImage () {
-    const prefixPosterPath = 'https://image.tmdb.org/t/p/w500/'
-    const posterPathId = this.props.video.poster_path
-    const posterPath = prefixPosterPath + posterPathId
-
-    if (this.state.error) {
-      return
-    }
-    return <img className='image-thumbnail' src={posterPath} onError={() => this.handleError()} />
-  }
-
   render () {
     return (
       <div >
@@ -90,10 +79,9 @@ export class Stories extends Component {
               onChange={this.handleSearch}
               loading={this.props.loading}
               cancel={this.props.cancelSearch}
-              // autoFocus
             />
           </div>
-          <div id='button-bar'>
+          <div className='button-bar'>
             <button
               type='button'
               onClick={() => this.props.loadMovies('star wars')}
@@ -103,7 +91,7 @@ export class Stories extends Component {
           </div>
         </div>
         <div style={{display: 'flex', justifyContent: 'flex-start'}}>
-          <div>
+          <div className={'container-movie-list'}>
             {this.storyList()}
           </div>
           <div>

@@ -2,7 +2,7 @@ import React from 'react'
 
 export function SearchField ({defaultValue, onChange, messages, loading, cancel}) {
   return (
-    <div>
+    <div className='search-container'>
       <input
         type="text"
         defaultValue={defaultValue}
@@ -11,11 +11,13 @@ export function SearchField ({defaultValue, onChange, messages, loading, cancel}
         autoFocus
       />
       {loading && (
+        <div className='cancel-button'>
         <button
           type='button'
           onClick={cancel}>
           Cancel
         </button>
+        </div>
       )}
       {messages.length > 0 && (
         <ul>
